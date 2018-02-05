@@ -1,0 +1,38 @@
+
+{
+	"buildFiles" : [ "C:/Users/lahm/Desktop/ctest/app/CMakeLists.txt" ],
+	"cleanCommands" : 
+	[
+		"C:\\Users\\lahm\\AppData\\Local\\Android\\sdk\\cmake\\3.6.4111459\\bin\\cmake.exe --build C:\\Users\\lahm\\Desktop\\ctest\\app\\.externalNativeBuild\\cmake\\debug\\arm64-v8a --target clean"
+	],
+	"cppFileExtensions" : [ "cpp" ],
+	"libraries" : 
+	{
+		"ctest-Debug-arm64-v8a" : 
+		{
+			"abi" : "arm64-v8a",
+			"artifactName" : "ctest",
+			"buildCommand" : "C:\\Users\\lahm\\AppData\\Local\\Android\\sdk\\cmake\\3.6.4111459\\bin\\cmake.exe --build C:\\Users\\lahm\\Desktop\\ctest\\app\\.externalNativeBuild\\cmake\\debug\\arm64-v8a --target ctest",
+			"buildType" : "debug",
+			"files" : 
+			[
+				
+				{
+					"flags" : "  --target=aarch64-none-linux-android --gcc-toolchain=C:/Users/lahm/AppData/Local/Android/sdk/ndk-bundle/toolchains/aarch64-linux-android-4.9/prebuilt/windows-x86_64 --sysroot=C:/Users/lahm/AppData/Local/Android/sdk/ndk-bundle/sysroot  -Dctest_EXPORTS -isystem C:\\Users\\lahm\\AppData\\Local\\Android\\sdk\\ndk-bundle\\sources\\cxx-stl\\gnu-libstdc++\\4.9\\include -isystem C:\\Users\\lahm\\AppData\\Local\\Android\\sdk\\ndk-bundle\\sources\\cxx-stl\\gnu-libstdc++\\4.9\\libs\\arm64-v8a\\include -isystem C:\\Users\\lahm\\AppData\\Local\\Android\\sdk\\ndk-bundle\\sources\\cxx-stl\\gnu-libstdc++\\4.9\\include\\backward  -isystem C:/Users/lahm/AppData/Local/Android/sdk/ndk-bundle/sysroot/usr/include/aarch64-linux-android -D__ANDROID_API__=21 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -Wa,--noexecstack -Wformat -Werror=format-security   -O0 -fno-limit-debug-info  -fPIC    -c ",
+					"src" : "C:/Users/lahm/Desktop/ctest/app/src/main/cpp/ctest.cpp",
+					"workingDirectory" : "C:/Users/lahm/Desktop/ctest/app/.externalNativeBuild/cmake/debug/arm64-v8a"
+				}
+			],
+			"output" : "C:/Users/lahm/Desktop/ctest/app/build/intermediates/cmake/debug/obj/arm64-v8a/libctest.so",
+			"toolchain" : "344536829"
+		}
+	},
+	"toolchains" : 
+	{
+		"344536829" : 
+		{
+			"cCompilerExecutable" : "C:/Users/lahm/AppData/Local/Android/sdk/ndk-bundle/toolchains/llvm/prebuilt/windows-x86_64/bin/clang.exe",
+			"cppCompilerExecutable" : "C:/Users/lahm/AppData/Local/Android/sdk/ndk-bundle/toolchains/llvm/prebuilt/windows-x86_64/bin/clang++.exe"
+		}
+	}
+}
