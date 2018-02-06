@@ -113,14 +113,14 @@ Java_com_example_lahm_ctest_MainActivity_checkDebug(JNIEnv *env, jobject instanc
     env->DeleteLocalRef(applicationInfoObj);
 
     if ((flags & 2) != 0) {
-//        pthread_exit(0);//这只是杀自己的c线程，应该调native的杀进程，这里学习调static java方法
+//        pthread_exit(0);//这只是杀自己的c线程，应该调native的杀进程，这里还是调 static java方法
         jclass processClass = env->FindClass("android/os/Process");
         jmethodID method_id_mypid = env->GetStaticMethodID(processClass, "myPid", "()I");
         jint mypid = env->CallStaticIntMethod(processClass, method_id_mypid);
 
 //        jmethodID method_id_kill = env->GetStaticMethodID(processClass, "killProcess", "(I)V");
         // 直接找一个不存在的方法杀死自己
-        jmethodID method_id_kill = env->GetStaticMethodID(processClass, "killProcess", "()");
+        jmethodID method_id_kill = env->GetStaticMethodID(processClass, "killProcess", "()V");
 //        env->CallStaticVoidMethod(processClass, method_id_kill, mypid);
         return mypid;
     }
