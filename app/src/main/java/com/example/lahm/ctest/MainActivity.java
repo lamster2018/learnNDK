@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        checkDebug();
+        checkDebug();//用jni调java的方法检查是否为debug版本，如果是则干掉自己
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         TextView textView = findViewById(R.id.content);
@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         reflection();
     }
 
-    public native String getMetaValue(String name);
+    public native String getMetaValue(String name);//jni调java方法拿清单里的shit的值
 
     private String getApplicationMetaValue(String name) {
         String value = "";

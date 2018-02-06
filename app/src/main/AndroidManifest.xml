@@ -18,7 +18,7 @@
         </activity>
         <meta-data
             android:name="shit"
-            android:value="去你妈的大傻逼" />
+            android:value="release版本是正常的" />
     </application>
 
 </manifest>
