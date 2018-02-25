@@ -1,9 +1,6 @@
 package com.example.lahm.ctest;
 
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.os.Process;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.widget.TextView;
@@ -20,6 +17,10 @@ public class MainActivity extends AppCompatActivity {
 
     public native String hello();
 
+    public native String getMetaValue(String name);//jni调java方法拿清单里的shit的值
+
+    public native int checkDebug();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         checkDebug();//用jni调java的方法检查是否为debug版本，如果是则干掉自己
@@ -29,38 +30,6 @@ public class MainActivity extends AppCompatActivity {
         textView.setText(getMetaValue("shit"));
         textView.setText(String.valueOf(checkDebug()));
         reflection();
-    }
-
-    public native String getMetaValue(String name);//jni调java方法拿清单里的shit的值
-
-    private String getApplicationMetaValue(String name) {
-        String value = "";
-        try {
-            ApplicationInfo appInfo = getPackageManager()
-                    .getApplicationInfo(getPackageName(),
-                            PackageManager.GET_META_DATA);
-            value = appInfo.metaData.getString(name);
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
-        }
-        return value;
-    }
-
-    public native int checkDebug();
-
-    private boolean checkIsDebug() {
-        try {
-            PackageManager packageManager = getPackageManager();
-
-            String packageName = getPackageName();
-
-            ApplicationInfo applicationInfo = packageManager.getApplicationInfo(packageName, PackageManager.GET_META_DATA);
-            Process.killProcess(Process.myPid());
-            return (applicationInfo.flags & ApplicationInfo.FLAG_DEBUGGABLE) != 0;
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
-            return false;
-        }
     }
 
     //结合反射学习jni调用java
