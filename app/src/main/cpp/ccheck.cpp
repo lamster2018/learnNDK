@@ -165,10 +165,10 @@ int check_signature(JNIEnv *env) {
         LOGD("not find method '%s'", method);
         return JNI_FALSE;
     }
-//
+
     jstring obj = (jstring) (env)->CallStaticObjectMethod(javaUtilClass, method);
     if (obj == NULL) {
-//        LOGD("method invoke error:%p", obj);
+        LOGD("method invoke error:%p", obj);
         return JNI_FALSE;
     }
 
@@ -211,14 +211,14 @@ JNI_OnLoad(JavaVM *vm, void *reserved) {
     JNIEnv *env;
     //获取JNI环境对象
     if (vm->GetEnv((void **) &env, JNI_VERSION_1_6) != JNI_OK) {
-//    LOGD("ERROR: GetEnv failed\n");
+    LOGD("ERROR: GetEnv failed\n");
         return JNI_ERR;
     }
     //签名校验
     LOGD("JNIEnv:%p", env);
     LOGD("start equal signature...");
     int check_sign_result = check_signature(env);
-//    LOGD("check_sign:%d", check_sign_result);
+    LOGD("check_sign:%d", check_sign_result);
     if (check_sign_result == JNI_FALSE) {
         exit(0);
     }
@@ -232,8 +232,8 @@ JNI_OnLoad(JavaVM *vm, void *reserved) {
         return JNI_ERR;
     }
     int methodsLength;
-//    //建立方法隐射关系
-//    //取得方法长度
+    //建立方法隐射关系
+    //取得方法长度
     methodsLength = sizeof(methods) / sizeof(methods[0]);
     if (env->RegisterNatives(clazz, methods, methodsLength) != 0) {
         LOGD("RegisterNatives failed for '%s'", className);

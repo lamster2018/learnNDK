@@ -6,6 +6,11 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
 
+import java.io.IOException;
+import java.net.InetAddress;
+import java.net.Socket;
+import java.net.UnknownHostException;
+
 /**
  * Project Name:learnNDK
  * Package Name:com.example.lahm.ctest
@@ -68,5 +73,35 @@ public class Utils {
     private String getApplicationMetaValue(String name) {
         ApplicationInfo appInfo = MyApplication.getContext().getApplicationInfo();
         return appInfo.metaData.getString(name);
+    }
+
+    /***
+     *  true:already in using  false:not using
+     * @param port
+     */
+    public static boolean isLoclePortUsing(int port) {
+        boolean flag = true;
+        try {
+            flag = isPortUsing("127.0.0.1", port);
+        } catch (Exception e) {
+        }
+        return flag;
+    }
+
+    /***
+     *  true:already in using  false:not using
+     * @param host
+     * @param port
+     * @throws UnknownHostException
+     */
+    public static boolean isPortUsing(String host, int port) throws UnknownHostException {
+        boolean flag = false;
+        InetAddress theAddress = InetAddress.getByName(host);
+        try {
+            Socket socket = new Socket(theAddress, port);
+            flag = true;
+        } catch (IOException e) {
+        }
+        return flag;
     }
 }
