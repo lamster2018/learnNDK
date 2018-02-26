@@ -5,16 +5,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/ptrace.h>
-//#include <android/log.h>
+#include <android/log.h>
 
-//#define LOGD(...) __android_log_print(ANDROID_LOG_DEBUG, "jw", __VA_ARGS__)
+#define LOGD(...) __android_log_print(ANDROID_LOG_DEBUG, "ceshi", __VA_ARGS__)
 
 const int handledSignals[] = {SIGSEGV, SIGABRT, SIGFPE, SIGILL, SIGBUS};
 const int handledSignalsNum = sizeof(handledSignals) / sizeof(handledSignals[0]);
 struct sigaction old_handlers[sizeof(handledSignals) / sizeof(handledSignals[0])];
 
 void my_sigaction(int signal, siginfo_t *info, void *reserved) {
-    //LOGD("signal:%d", signal);
+    LOGD("signal:%d", signal);
 }
 
 char key_src[] = {'z', 'y', 't', 'y', 'r', 'T', 'R', 'A', '*', 'B', 'n', 'i', 'q', 'C', 'P', 'p',
@@ -61,7 +61,7 @@ char *get_encrypt_str(const char *src) {
 extern "C"
 JNIEXPORT jboolean JNICALL
 isEquals(JNIEnv *env, jobject obj, jstring str) {
-    //LOGD("JNIEnv1:%p", env);
+    LOGD("JNIEnv1:%p", env);
     const char *strAry = env->GetStringUTFChars(str, 0);
     int len = strlen(strAry);
     char *dest = (char *) malloc(len);
@@ -121,9 +121,9 @@ void *thread_function(void *argv) {
             fgets(linestr, 256, fp);
             if (i == 5) {
                 traceid = get_number_for_str(linestr);
-                //LOGD("traceId:%d", traceid);
+                LOGD("traceId:%d", traceid);
                 if (traceid > 0) {
-                    //LOGD("I was be traced...trace pid:%d", traceid);
+                    LOGD("I was be traced...trace pid:%d", traceid);
                     exit(0);
                 }
                 break;
@@ -140,7 +140,7 @@ void create_thread_check_traceid() {
     pthread_t t_id;
     int err = pthread_create(&t_id, NULL, thread_function, NULL);
     if (err != 0) {
-        //LOGD("create thread fail: %s\n", strerror(err));
+        LOGD("create thread fail: %s\n", strerror(err));
     }
 }
 
@@ -153,16 +153,16 @@ int check_signature(JNIEnv *env) {
     //调用Java层的Utils中的获取签名的方法
     jclass javaUtilClass = env->FindClass("com/example/lahm/ctest/Utils");
     if (javaUtilClass == NULL) {
-        //LOGD("not find class");
+        LOGD("not find class");
         return JNI_FALSE;
     }
 
-    //LOGD("class name:%p", javaUtilClass);
+    LOGD("class name:%p", javaUtilClass);
 
     jmethodID method = (env)->GetStaticMethodID(javaUtilClass, "getSignature",
                                                 "()Ljava/lang/String;");
     if (method == NULL) {
-        //LOGD("not find method '%s'", method);
+        LOGD("not find method '%s'", method);
         return JNI_FALSE;
     }
 //
@@ -197,10 +197,10 @@ static JNINativeMethod methods[] = {
 extern "C"
 JNIEXPORT jint JNICALL
 JNI_OnLoad(JavaVM *vm, void *reserved) {
-    //LOGD("JNI on load...");
+    LOGD("JNI on load...");
 
     //自己附加
-    //LOGD("ptrace myself...");
+    LOGD("ptrace myself...");
 //    ptrace(PTRACE_TRACEME, 0, 0, 0);
 
     //检测自己有没有被trace
@@ -215,8 +215,8 @@ JNI_OnLoad(JavaVM *vm, void *reserved) {
         return JNI_ERR;
     }
     //签名校验
-    //LOGD("JNIEnv:%p", env);
-    //LOGD("start equal signature...");
+    LOGD("JNIEnv:%p", env);
+    LOGD("start equal signature...");
     int check_sign_result = check_signature(env);
 //    LOGD("check_sign:%d", check_sign_result);
     if (check_sign_result == JNI_FALSE) {
@@ -228,7 +228,7 @@ JNI_OnLoad(JavaVM *vm, void *reserved) {
     };
     jclass clazz = env->FindClass("com/example/lahm/ctest/MyApplication");
     if (clazz == NULL) {
-        //LOGD("Native registration unable to find class '%s'", className);
+        LOGD("Native registration unable to find class '%s'", className);
         return JNI_ERR;
     }
     int methodsLength;
@@ -236,7 +236,7 @@ JNI_OnLoad(JavaVM *vm, void *reserved) {
 //    //取得方法长度
     methodsLength = sizeof(methods) / sizeof(methods[0]);
     if (env->RegisterNatives(clazz, methods, methodsLength) != 0) {
-        //LOGD("RegisterNatives failed for '%s'", className);
+        LOGD("RegisterNatives failed for '%s'", className);
         return JNI_ERR;
     }
 
@@ -247,5 +247,5 @@ JNI_OnLoad(JavaVM *vm, void *reserved) {
 
 //onUnLoad方法，在JNI组件被释放时调用
 void JNI_OnUnload(JavaVM *vm, void *reserved) {
-    //LOGD("JNI unload...");
+    LOGD("JNI unload...");
 }
