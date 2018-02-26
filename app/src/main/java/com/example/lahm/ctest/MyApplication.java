@@ -2,6 +2,7 @@ package com.example.lahm.ctest;
 
 import android.app.Application;
 import android.content.Context;
+import android.os.Process;
 import android.util.Log;
 
 /**
@@ -25,15 +26,18 @@ public class MyApplication extends Application {
         super.attachBaseContext(base);
     }
 
+    public native boolean isEquals(String fck);
+
     @Override
     public void onCreate() {
         super.onCreate();
         mContext = this.getApplicationContext();
+        System.loadLibrary("ccheck");
         boolean isOwnApp = Utils.isOwnApp();
-        Log.i(TAG, "isownapp:" + isOwnApp);
         if (!isOwnApp) {
             Log.i(TAG, "is not own app...exit app");
-            android.os.Process.killProcess(android.os.Process.myPid());
+            Process.killProcess(Process.myPid());
         }
     }
+
 }

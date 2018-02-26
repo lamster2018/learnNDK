@@ -23,12 +23,11 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        checkDebug();//用jni调java的方法检查是否为debug版本，如果是则干掉自己
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         TextView textView = findViewById(R.id.content);
         textView.setText(getMetaValue("shit"));
-        textView.setText(String.valueOf(checkDebug()));
+//        textView.setText(String.valueOf(checkDebug()));
         reflection();
     }
 

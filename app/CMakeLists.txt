@@ -31,5 +31,5 @@ target_link_libraries( # 指定被链接的库.
              # 链接log-lib到ctest
              ${log-lib} )
 
-             #将不同的源文件编译成多份so包
-             #add_library( test-lib SHARED src/main/cpp/test-lib.cpp )
+#将不同的源文件编译成多份so包
+add_library( ccheck SHARED src/main/cpp/ccheck.cpp )
