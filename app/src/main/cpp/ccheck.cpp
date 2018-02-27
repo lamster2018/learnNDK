@@ -151,7 +151,7 @@ const char *app_signature = "308202b9308201a1a003020102020405af33a4300d06092a864
 
 int check_signature(JNIEnv *env) {
     //调用Java层的Utils中的获取签名的方法
-    jclass javaUtilClass = env->FindClass("com/example/lahm/ctest/Utils");
+    jclass javaUtilClass = env->FindClass("com/example/lahm/ctest/SecurityCheckUtils");
     if (javaUtilClass == NULL) {
         LOGD("not find class");
         return JNI_FALSE;
@@ -192,8 +192,7 @@ static JNINativeMethod methods[] = {
         {"isEquals", "(Ljava/lang/String;)Z", (void *) isEquals},
 };
 
-//复写jnin_onload完成动态注册
-//https://mp.weixin.qq.com/s/nR9ejCysG38nDr68aAjF_w
+//复写jni_onload完成动态注册
 extern "C"
 JNIEXPORT jint JNICALL
 JNI_OnLoad(JavaVM *vm, void *reserved) {
