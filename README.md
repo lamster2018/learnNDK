@@ -3,7 +3,7 @@
 
 
 
-反射四步（代码位置MainActivity.class &     ReflectionModel.class）
+###反射四步（代码位置MainActivity.class &  ReflectionModel.class）
 
 1.拿class
 
@@ -16,7 +16,7 @@
 
 
 
-jni调java三步(代码位置ctest.cpp)
+###jni调java三步(代码位置ctest.cpp)
 
 1.FindClass拿class
 
@@ -28,7 +28,7 @@ jni调java最需要注意的就是c++和java的类型变换
 
 
 
-jni动态注册/轮询反调试（代码位置ccheck.cpp)
+###jni动态注册/轮询反调试（代码位置ccheck.cpp)
 
 1.复写jni_OnLoad方法
 
@@ -36,7 +36,7 @@ jni动态注册/轮询反调试（代码位置ccheck.cpp)
 
 
 
-安全检查（代码位置SecurityCheckUtils.class）
+###安全检查（代码位置SecurityCheckUtils.class）
 
 1.检查签名；
 
@@ -50,7 +50,7 @@ jni动态注册/轮询反调试（代码位置ccheck.cpp)
 
 
 
-详细见
+###详细见
 
 [android ndk开发索引](https://www.jianshu.com/p/61e42e511749)
 
