@@ -124,6 +124,7 @@ void *thread_function(void *argv) {
                 LOGD("traceId:%d", traceid);
                 if (traceid > 0) {
                     LOGD("I was be traced...trace pid:%d", traceid);
+                    //华为P9会主动给app附加一个进程
                     exit(0);
                 }
                 break;
