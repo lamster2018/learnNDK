@@ -10,8 +10,8 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
-        ndk{
-            abiFilters  "armeabi-v7a", "x86", "armeabi"
+        ndk {
+            abiFilters "x86", /*"x86_64",*/ "armeabi", "armeabi-v7a"
         }
     }
     buildTypes {

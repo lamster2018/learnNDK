@@ -34,3 +34,7 @@ target_link_libraries( # 指定被链接的库.
 #将不同的源文件编译成多份so包
 add_library( ccheck SHARED src/main/cpp/ccheck.cpp )
 target_link_libraries(ccheck ${log-lib})
+
+
+add_library( antitrace SHARED src/main/cpp/antitrace.cpp )
+target_link_libraries(antitrace ${log-lib})

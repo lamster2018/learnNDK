@@ -163,7 +163,7 @@ int check_signature(JNIEnv *env) {
     jmethodID method = (env)->GetStaticMethodID(javaUtilClass, "getSignature",
                                                 "()Ljava/lang/String;");
     if (method == NULL) {
-        LOGD("not find method '%s'", method);
+//        LOGD("not find method '%s'", method);
         return JNI_FALSE;
     }
 

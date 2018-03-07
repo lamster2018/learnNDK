@@ -32,6 +32,7 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         mContext = this.getApplicationContext();
+        System.loadLibrary("antitrace");
         System.loadLibrary("ccheck");
         antiXposedInject();
     }
