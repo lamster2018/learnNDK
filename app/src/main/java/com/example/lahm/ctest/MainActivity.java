@@ -3,6 +3,7 @@ package com.example.lahm.ctest;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
+import android.view.View;
 import android.widget.TextView;
 
 import java.lang.reflect.Constructor;
@@ -21,14 +22,22 @@ public class MainActivity extends AppCompatActivity {
 
     public native int checkDebug();
 
+    public native void callMemLeak(int size);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         TextView textView = findViewById(R.id.content);
         textView.setText(getMetaValue("shit"));
+        findViewById(R.id.callMemLeak).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                callMemLeak(40);
+            }
+        });
 //        textView.setText(String.valueOf(checkDebug()));
-        reflection();
+//        reflection();
     }
 
     //结合反射学习jni调用java

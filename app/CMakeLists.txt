@@ -17,7 +17,7 @@ add_library( # 设置编译出来的so包的名字. 不需要添加lib前缀
              SHARED
 
              # 设置源文件的相对路径，可将多个源文件进行编译
-             src/main/cpp/ctest.cpp )
+             src/main/jni/ctest.cpp )
 
 find_library( # 设置外部引用库.这个库支持你在c/c++中打印log，具体请见  android/log.h
              log-lib
@@ -32,9 +32,9 @@ target_link_libraries( # 指定被链接的库.
              ${log-lib} )
 
 #将不同的源文件编译成多份so包
-add_library( ccheck SHARED src/main/cpp/ccheck.cpp )
+add_library( ccheck SHARED src/main/jni/ccheck.cpp )
 target_link_libraries(ccheck ${log-lib})
 
 
-add_library( antitrace SHARED src/main/cpp/antitrace.cpp )
+add_library( antitrace SHARED src/main/jni/antitrace.cpp )
 target_link_libraries(antitrace ${log-lib})

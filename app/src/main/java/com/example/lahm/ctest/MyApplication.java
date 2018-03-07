@@ -26,14 +26,14 @@ public class MyApplication extends Application {
         super.attachBaseContext(base);
     }
 
-    public native boolean isEquals(String fck);
+//    public native boolean isEquals(String fck);
 
     @Override
     public void onCreate() {
         super.onCreate();
         mContext = this.getApplicationContext();
-        System.loadLibrary("antitrace");
-        System.loadLibrary("ccheck");
+//        System.loadLibrary("antitrace");
+//        System.loadLibrary("ccheck");
         antiXposedInject();
     }
 

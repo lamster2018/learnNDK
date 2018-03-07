@@ -2,6 +2,10 @@
 #include <string>
 #include <stdlib.h>
 
+#include <android/log.h>
+
+#define LOGD(...) __android_log_print(ANDROID_LOG_DEBUG, "ceshi", __VA_ARGS__)
+
 extern "C"
 JNIEXPORT jstring JNICALL
 Java_com_example_lahm_ctest_MainActivity_hello(JNIEnv *env, jobject instance) {
@@ -119,4 +123,59 @@ Java_com_example_lahm_ctest_MainActivity_checkDebug(JNIEnv *env, jobject instanc
     }
 
     return flags & 2;
+}
+
+extern "C"
+JNIEXPORT void JNICALL
+callMemLeak(JNIEnv *env, jobject obj, jint size) {
+    //分配40M
+    int *p = (int *) malloc(1024 * 1024 * size);
+
+    //下一次分配之前，如果不释放，会造成40M的内存泄漏
+//    free(p);
+//    p = NULL;
+    //分配10M
+//    p = (int *) malloc(1024 * 1024 * 10);
+//    free(p);
+//    p = NULL;
+}
+
+//复写jni_onload完成动态注册
+extern "C"
+JNIEXPORT jint JNICALL
+JNI_OnLoad(JavaVM *vm, void *reserved) {
+
+    //声明变量
+    jint result = JNI_ERR;
+    JNIEnv *env;
+    //获取JNI环境对象
+    if (vm->GetEnv((void **) &env, JNI_VERSION_1_6) != JNI_OK) {
+        LOGD("ERROR: GetEnv failed\n");
+        return JNI_ERR;
+    }
+
+    JNINativeMethod methods[] = {
+            {"callMemLeak", "(I)V", (void *) callMemLeak},
+    };
+    jclass clazz = env->FindClass("com/example/lahm/ctest/MainActivity");
+    if (clazz == NULL) {
+        LOGD("Native registration unable to find class");
+        return JNI_ERR;
+    }
+    int methodsLength;
+    //建立方法隐射关系
+    //取得方法长度
+    methodsLength = sizeof(methods) / sizeof(methods[0]);
+    if (env->RegisterNatives(clazz, methods, methodsLength) != 0) {
+        return JNI_ERR;
+    }
+
+    result = JNI_VERSION_1_6;
+    return result;
+}
+
+
+//onUnLoad方法，在JNI组件被释放时调用
+void JNI_OnUnload(JavaVM *vm, void *reserved) {
+    LOGD("JNI unload...");
 }
