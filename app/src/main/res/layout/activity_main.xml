@@ -15,4 +15,10 @@
         android:layout_width="100dp"
         android:layout_height="50dp"
         android:text="check mem on AS" />
+
+    <Button
+        android:id="@+id/jump2second"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:text="jump2second" />
 </LinearLayout>

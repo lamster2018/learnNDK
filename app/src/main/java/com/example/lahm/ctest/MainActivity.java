@@ -1,5 +1,6 @@
 package com.example.lahm.ctest;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -38,6 +39,12 @@ public class MainActivity extends AppCompatActivity {
         });
 //        textView.setText(String.valueOf(checkDebug()));
 //        reflection();
+        findViewById(R.id.jump2second).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, SecondActivity.class));
+            }
+        });
     }
 
     //结合反射学习jni调用java

@@ -17,9 +17,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <meta-data
             android:name="shit"
             android:value="release版本是正常的" />
+
+        <activity android:name=".SecondActivity" />
     </application>
 
 </manifest>

@@ -38,3 +38,6 @@ target_link_libraries(ccheck ${log-lib})
 
 add_library( antitrace SHARED src/main/jni/antitrace.cpp )
 target_link_libraries(antitrace ${log-lib})
+
+add_library( cfile SHARED src/main/jni/cfile.cpp )
+target_link_libraries(cfile ${log-lib})

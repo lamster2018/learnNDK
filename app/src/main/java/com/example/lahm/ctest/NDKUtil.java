@@ -29,6 +29,12 @@ public class NDKUtil {
         }
     }
 
+    public static void loadLibraryByName(String libName) {
+        synchronized (NDKUtil.class) {
+            localLibLoader.loadLibrary(libName);
+        }
+    }
+
     public NDKUtil() {
         this(localLibLoader);
     }
